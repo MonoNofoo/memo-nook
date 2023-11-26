@@ -1,14 +1,20 @@
 import { render, screen } from '@testing-library/react';
-import Header, { HeaderProps } from '@src/app/_components/header/Header';
+import Header from '@src/app/_components/header/Header';
+import { topPagePath } from '@src/utils/const/pagePath';
+
+const mockUsePathname = jest.fn();
+jest.mock('next/navigation', () => ({
+  usePathname() {
+    return mockUsePathname();
+  },
+}));
 
 describe('Header コンポーネントについて', () => {
-  const testData: HeaderProps = {
-    isLink: false,
-  };
-
-  const setup = (data = testData) => render(<Header {...data} />);
+  const setup = () => render(<Header />);
 
   it('isLink が false のときはサイト名が見出しになっている', () => {
+    mockUsePathname.mockImplementation(() => '/');
+
     setup();
     const target = screen.getByRole('heading', {
       level: 1,
@@ -19,11 +25,13 @@ describe('Header コンポーネントについて', () => {
   });
 
   it('isLink が true のときはサイト名がリンクになっている', () => {
-    setup({ isLink: true });
+    mockUsePathname.mockImplementation(() => '/dummy');
+
+    setup();
     const target = screen.getByRole('link', {
       name: /^MEMO NOOK$/,
     });
 
-    expect(target).toHaveAttribute('href', '/');
+    expect(target).toHaveAttribute('href', topPagePath);
   });
 });

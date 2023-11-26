@@ -1,1 +1,1 @@
-export const topPage = '/';
+export const topPagePath = '/';
