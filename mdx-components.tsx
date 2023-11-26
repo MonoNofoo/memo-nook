@@ -1,5 +1,5 @@
-import Title from '@src/app/article/_components/title/title';
 import type { MDXComponents } from 'mdx/types';
+import Title from '@src/app/article/_components/title/title';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

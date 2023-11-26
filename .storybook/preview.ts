@@ -1,5 +1,6 @@
-import '@src/app/base.css';
 import type { Preview } from '@storybook/react';
+import 'sanitize.css';
+import '@src/app/base.css';
 
 const preview: Preview = {
   parameters: {

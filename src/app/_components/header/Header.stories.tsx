@@ -1,5 +1,5 @@
-import Header from '@src/app/_components/header/Header';
 import { Meta, StoryObj } from '@storybook/react';
+import Header from '@src/app/_components/header/Header';
 
 const meta = {
   component: Header,
@@ -9,11 +9,22 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
+export const TitleHeader: Story = {
+  args: {
+    isLink: false,
+  },
+};
+
+export const TitleLink: Story = {
+  args: {
+    isLink: true,
+  },
 };
 
 export const Scroll: Story = {
+  args: {
+    ...TitleHeader.args,
+  },
   decorators: [
     (Story) => (
       <div style={{ height: '3000px' }}>

@@ -1,5 +1,5 @@
-import Title, { TitleProps } from '@src/app/article/_components/title/title';
 import { render, screen } from '@testing-library/react';
+import Title, { TitleProps } from '@src/app/article/_components/title/title';
 
 describe('Title コンポーネントについて', () => {
   const testData: TitleProps = {

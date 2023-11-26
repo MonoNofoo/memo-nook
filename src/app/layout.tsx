@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { M_PLUS_1 } from 'next/font/google';
-import '@src/app/base.css';
 import clsx from 'clsx';
+import 'sanitize.css';
+import '@src/app/base.css';
 
 const mPlusOne = M_PLUS_1({
   subsets: ['latin'],

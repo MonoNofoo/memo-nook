@@ -1,7 +1,7 @@
-import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
-import createMDX from '@next/mdx';
 import rehypePrism from '@mapbox/rehype-prism';
-import remarkBreaks from "remark-breaks";
+import createMDX from '@next/mdx';
+import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
+import remarkBreaks from 'remark-breaks';
 
 const withVanillaExtract = createVanillaExtractPlugin();
 
@@ -12,11 +12,9 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [
-      remarkBreaks,
-    ],
-    rehypePlugins: [rehypePrism]
-  }
-})
+    remarkPlugins: [remarkBreaks],
+    rehypePlugins: [rehypePrism],
+  },
+});
 
 export default withVanillaExtract(withMDX(nextConfig));
