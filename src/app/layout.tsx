@@ -1,4 +1,13 @@
 import type { Metadata } from 'next';
+import { M_PLUS_1 } from 'next/font/google';
+import '@src/app/base.css';
+import clsx from 'clsx';
+
+const mPlusOne = M_PLUS_1({
+  subsets: ['latin'],
+  variable: '--font-m-plus-one',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -6,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <html lang="ja">
+  <html lang="ja" className={clsx(mPlusOne.variable)}>
     <body>{children}</body>
   </html>
 );
