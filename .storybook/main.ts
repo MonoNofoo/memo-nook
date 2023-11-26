@@ -57,12 +57,13 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  staticDirs: ['../public'],
+  staticDirs: ['../public/'],
   async webpackFinal(config, { configType }) {
     if (config?.resolve?.alias) {
       config.resolve.alias = {
         ...config.resolve.alias,
         '@src': path.resolve(__dirname, '../src'),
+        '@public': path.resolve(__dirname, '../public'),
       };
     }
 

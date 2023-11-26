@@ -1,5 +1,5 @@
 import { keyframes, style, StyleRule } from '@vanilla-extract/css';
-import { vars } from '@src/app/base.css';
+import { vars } from '@src/styles/base.css';
 
 const timeline = 'scroll()';
 const frame = (from: StyleRule, to: StyleRule) => ({
