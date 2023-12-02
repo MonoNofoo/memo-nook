@@ -4,7 +4,7 @@ import { M_PLUS_1 } from 'next/font/google';
 import clsx from 'clsx';
 import 'sanitize.css';
 import Header from '@src/app/_components/header/Header';
-import '@src/app/base.css';
+import '@src/styles/base.css';
 
 const mPlusOne = M_PLUS_1({
   subsets: ['latin'],

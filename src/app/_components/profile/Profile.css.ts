@@ -4,7 +4,7 @@ import { paperShadowStyle, vars } from '@src/styles/base.css';
 export const container = style([
   paperShadowStyle,
   {
-    margin: 15,
+    margin: '15px 0 0',
     padding: '16px 8px',
     backgroundColor: vars.color.white,
   },
@@ -41,7 +41,9 @@ export const tape = style({
 export const image = style({
   width: '100%',
   height: '100%',
-  border: '2px solid #eee',
+  padding: 8,
+  borderRadius: '3px',
+  boxShadow: '0 0 2px rgba(0,0,0,.2)',
   objectFit: 'contain',
 });
 

@@ -23,7 +23,7 @@ export const paperShadowStyle = style({
       zIndex: -1,
       position: 'absolute',
       content: '',
-      bottom: '15px',
+      bottom: '16px',
       width: '50%',
       top: '80%',
       boxShadow: vars.shadow.paper,
