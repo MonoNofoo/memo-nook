@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import * as styles from '@src/app/_components/header/Header.css';
-import { topPagePath } from '@src/utils/const/pagePath';
+import { topPagePath } from '@src/const/pagePath';
 
 const patrick = Patrick_Hand({
   weight: '400',

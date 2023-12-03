@@ -6,9 +6,11 @@ export const metadata: Metadata = {
   description: '備忘録てきななにか。',
 };
 
-const Home = () => (
-  <main className={styles.container}>
-    <Profile />
-  </main>
-);
+const Home = async () => {
+  return (
+    <main className={styles.container}>
+      <Profile />
+    </main>
+  );
+};
 export default Home;

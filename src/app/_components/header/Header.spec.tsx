@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Header from '@src/app/_components/header/Header';
-import { topPagePath } from '@src/utils/const/pagePath';
+import { topPagePath } from '@src/const/pagePath';
 
 const mockUsePathname = jest.fn();
 jest.mock('next/navigation', () => ({
