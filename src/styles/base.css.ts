@@ -1,9 +1,16 @@
 import { createGlobalTheme, globalStyle, style } from '@vanilla-extract/css';
 
+/**
+ * 変数
+ */
 export const vars = createGlobalTheme(':root', {
   color: {
     white: '#fff',
     tapeBlue: '#54b5ff',
+    tapePink: '#ff8ce8',
+    tapeYellow: '#ffd300',
+    tapeGreen: '#49db3b',
+    tapePurple: '#a733ff',
     fontDefault: '#333',
     fontGray: '#999',
     outerBackground: '#fafafa',
@@ -16,6 +23,9 @@ export const vars = createGlobalTheme(':root', {
   },
 });
 
+/**
+ * 貼り付けてる風な紙の影
+ */
 export const paperShadowStyle = style({
   position: 'relative',
   selectors: {
@@ -39,13 +49,24 @@ export const paperShadowStyle = style({
   },
 });
 
+export const tapeShape = style({
+  position: 'absolute',
+  top: '-15px',
+  left: '50%',
+  height: 30,
+  width: '30%',
+  transform: 'translateX(-50%) rotate(-4deg)',
+  opacity: 0.3,
+  boxShadow: '0 0 5px rgba(0,0,0,.2)',
+});
+
 globalStyle('html', {
   fontSize: '62.5%',
 });
 
 globalStyle('body', {
   backgroundColor: vars.color.outerBackground,
-  lineHeight: 1.2,
+  lineHeight: 1.4,
   fontSize: '1.6rem',
   color: vars.color.fontDefault,
   fontFamily: vars.font.default,

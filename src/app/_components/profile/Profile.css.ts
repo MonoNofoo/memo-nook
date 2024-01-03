@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { paperShadowStyle, vars } from '@src/styles/base.css';
+import { paperShadowStyle, tapeShape, vars } from '@src/styles/base.css';
 
 export const container = style([
   paperShadowStyle,
@@ -26,17 +26,12 @@ export const showcase = style({
   },
 });
 
-export const tape = style({
-  position: 'absolute',
-  top: '-15px',
-  left: '50%',
-  height: 30,
-  width: '30%',
-  backgroundImage: `repeating-linear-gradient(-45deg, ${vars.color.tapeBlue}, ${vars.color.tapeBlue} 10px, ${vars.color.white} 10px, ${vars.color.white} 20px)`,
-  transform: 'translateX(-50%) rotate(-4deg)',
-  opacity: 0.3,
-  boxShadow: '0 0 5px rgba(0,0,0,.2)',
-});
+export const tape = style([
+  tapeShape,
+  {
+    backgroundImage: `repeating-linear-gradient(-45deg, ${vars.color.tapeBlue}, ${vars.color.tapeBlue} 10px, ${vars.color.white} 10px, ${vars.color.white} 20px)`,
+  },
+]);
 
 export const image = style({
   width: '100%',
