@@ -5,10 +5,14 @@ const symbolCreatedAt = Symbol('CreatedAt');
 export class CreatedAt {
   readonly symbol: typeof symbolCreatedAt = symbolCreatedAt;
 
-  readonly value: Date;
+  private readonly value: Date;
 
   constructor(value: Date) {
     this.value = value;
+  }
+
+  get() {
+    return this.value;
   }
 
   formatter() {
