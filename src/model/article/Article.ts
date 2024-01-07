@@ -1,3 +1,6 @@
+import { Metadata } from 'next';
+import * as fs from 'fs';
+import { articleDirectoryPath } from '@src/const/path';
 import { ArticleSlug } from '@src/model/article/ArticleSlug';
 import { CreatedAt } from '@src/model/article/CreatedAt';
 import { Title } from '@src/model/article/Title';
@@ -38,5 +41,23 @@ export class Article {
 
   getArticleSlug() {
     return this.articleSlug;
+  }
+
+  static async makeArticleByFile(slug: ArticleSlug) {
+    'use server';
+
+    const { birthtime, mtime } = fs.statSync(
+      `${articleDirectoryPath}/${slug.get()}/page.mdx`,
+    );
+    const { metadata }: { metadata: Metadata } = await import(
+      `@src/app/article/(contents)/${slug.get()}/page.mdx`
+    );
+
+    return new Article(
+      new Title(metadata.title),
+      new CreatedAt(new Date(birthtime)),
+      new UpdatedAt(new Date(mtime)),
+      slug,
+    );
   }
 }

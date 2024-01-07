@@ -1,22 +1,8 @@
-import { Metadata } from 'next';
 import * as fs from 'fs';
-import path from 'path';
+import { articleDirectoryPath } from '@src/const/path';
 import { Article } from '@src/model/article/Article';
 import { ArticleSlug } from '@src/model/article/ArticleSlug';
-import { CreatedAt } from '@src/model/article/CreatedAt';
-import { Title } from '@src/model/article/Title';
-import { UpdatedAt } from '@src/model/article/UpdatedAt';
 
-/**
- * 記事が格納されているディレクトリのパス
- */
-const articleDirectoryPath = path.join(
-  process.cwd(),
-  'src',
-  'app',
-  'article',
-  '(contents)',
-);
 const symbolArticles = Symbol('Articles');
 
 export class Articles {
@@ -46,19 +32,7 @@ export class Articles {
 
     const list: Article[] = await Promise.all(
       slugNames.map(async (slugName) => {
-        const { birthtime, mtime } = fs.statSync(
-          `${articleDirectoryPath}/${slugName}/page.mdx`,
-        );
-        const { metadata }: { metadata: Metadata } = await import(
-          `@src/app/article/(contents)/${slugName}/page.mdx`
-        );
-
-        return new Article(
-          new Title(metadata.title),
-          new CreatedAt(new Date(birthtime)),
-          new UpdatedAt(new Date(mtime)),
-          new ArticleSlug(slugName),
-        );
+        return Article.makeArticleByFile(new ArticleSlug(slugName));
       }),
     );
 

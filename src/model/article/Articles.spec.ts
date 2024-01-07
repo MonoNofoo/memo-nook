@@ -15,7 +15,7 @@ jest.mock(`@src/app/article/_mock/mock-2/page.mdx`, () => {
   return { metadata: { title: 'title2' } };
 });
 
-describe('articleList について', () => {
+describe('Articles について', () => {
   beforeEach(() => {
     (
       fs.readdirSync as jest.MockedFunction<typeof fs.readdirSync>
