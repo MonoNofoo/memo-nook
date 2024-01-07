@@ -65,7 +65,9 @@ globalStyle('html', {
 });
 
 globalStyle('body', {
+  minHeight: '100vh',
   backgroundColor: vars.color.outerBackground,
+  containerType: 'inline-size',
   lineHeight: 1.4,
   fontSize: '1.6rem',
   color: vars.color.fontDefault,

@@ -1,9 +1,8 @@
-'use server';
-
 import { Metadata } from 'next';
 import * as fs from 'fs';
 import path from 'path';
 import { Article } from '@src/model/article/Article';
+import { ArticleSlug } from '@src/model/article/ArticleSlug';
 import { CreatedAt } from '@src/model/article/CreatedAt';
 import { Title } from '@src/model/article/Title';
 import { UpdatedAt } from '@src/model/article/UpdatedAt';
@@ -27,6 +26,10 @@ export class Articles {
 
   constructor(list: Article[]) {
     this.list = list;
+  }
+
+  get() {
+    return this.list;
   }
 
   sortDescByCreated() {
@@ -54,6 +57,7 @@ export class Articles {
           new Title(metadata.title),
           new CreatedAt(new Date(birthtime)),
           new UpdatedAt(new Date(mtime)),
+          new ArticleSlug(slugName),
         );
       }),
     );

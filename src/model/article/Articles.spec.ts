@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import { Article } from '@src/model/article/Article';
+import { ArticleSlug } from '@src/model/article/ArticleSlug';
 import { Articles } from '@src/model/article/Articles';
 import { CreatedAt } from '@src/model/article/CreatedAt';
 import { Title } from '@src/model/article/Title';
@@ -7,10 +8,10 @@ import { UpdatedAt } from '@src/model/article/UpdatedAt';
 
 jest.mock('fs');
 
-jest.mock(`@src/app/article/(contents)/_mock/mock-1/page.mdx`, () => {
+jest.mock(`@src/app/article/_mock/mock-1/page.mdx`, () => {
   return { metadata: { title: 'title1' } };
 });
-jest.mock(`@src/app/article/(contents)/_mock/mock-2/page.mdx`, () => {
+jest.mock(`@src/app/article/_mock/mock-2/page.mdx`, () => {
   return { metadata: { title: 'title2' } };
 });
 
@@ -19,7 +20,7 @@ describe('articleList について', () => {
     (
       fs.readdirSync as jest.MockedFunction<typeof fs.readdirSync>
     ).mockImplementation(
-      jest.fn().mockReturnValue(['_mock/mock-1', '_mock/mock-2']),
+      jest.fn().mockReturnValue(['../_mock/mock-1', '../_mock/mock-2']),
     );
 
     (fs.statSync as jest.MockedFunction<typeof fs.statSync>)
@@ -46,11 +47,13 @@ describe('articleList について', () => {
           new Title('title1'),
           new CreatedAt(new Date('2023-11-01')),
           new UpdatedAt(new Date('2023-11-02')),
+          new ArticleSlug('../_mock/mock-1'),
         ),
         new Article(
           new Title('title2'),
           new CreatedAt(new Date('2023-11-03')),
           new UpdatedAt(new Date('2023-11-04')),
+          new ArticleSlug('../_mock/mock-2'),
         ),
       ]),
     );
@@ -66,11 +69,13 @@ describe('articleList について', () => {
           new Title('title2'),
           new CreatedAt(new Date('2023-11-03')),
           new UpdatedAt(new Date('2023-11-04')),
+          new ArticleSlug('../_mock/mock-2'),
         ),
         new Article(
           new Title('title1'),
           new CreatedAt(new Date('2023-11-01')),
           new UpdatedAt(new Date('2023-11-02')),
+          new ArticleSlug('../_mock/mock-1'),
         ),
       ]),
     );

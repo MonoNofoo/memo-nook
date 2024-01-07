@@ -59,10 +59,11 @@ export const title = style({
 export const dateShowcase = style({
   marginTop: 16,
   display: 'flex',
-  justifyContent: 'end',
+  justifyContent: 'flex-end',
   fontSize: '1.2rem',
 });
 
 export const date = style({
   marginLeft: 8,
+  textDecoration: 'none',
 });

@@ -12,4 +12,8 @@ export class Title {
 
     this.value = value;
   }
+
+  get() {
+    return this.value;
+  }
 }
