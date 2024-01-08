@@ -7,7 +7,7 @@ import { UpdatedAt } from '@src/model/article/UpdatedAt';
 
 jest.mock('fs');
 
-jest.mock(`@src/app/article/_mock/mock-1/page.mdx`, () => {
+jest.mock(`@src/app/article/_mock/mock-1.mdx`, () => {
   return { metadata: { title: 'title1' } };
 });
 

@@ -39,6 +39,10 @@ export class Article {
     return this.createdAt;
   }
 
+  getUpdatedAt() {
+    return this.updatedAt;
+  }
+
   getArticleSlug() {
     return this.articleSlug;
   }
@@ -47,10 +51,10 @@ export class Article {
     'use server';
 
     const { birthtime, mtime } = fs.statSync(
-      `${articleDirectoryPath}/${slug.get()}/page.mdx`,
+      `${articleDirectoryPath}/${slug.get()}.mdx`,
     );
     const { metadata }: { metadata: Metadata } = await import(
-      `@src/app/article/(contents)/${slug.get()}/page.mdx`
+      `@src/app/article/_mdx/${slug.get()}.mdx`
     );
 
     return new Article(

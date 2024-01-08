@@ -8,5 +8,5 @@ export const articleDirectoryPath = path.join(
   'src',
   'app',
   'article',
-  '(contents)',
+  '_mdx',
 );
