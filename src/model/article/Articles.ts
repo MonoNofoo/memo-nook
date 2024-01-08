@@ -28,10 +28,11 @@ export class Articles {
   }
 
   static async makeArticlesByFiles() {
-    const slugNames = fs.readdirSync(articleDirectoryPath);
+    const fileNames = fs.readdirSync(articleDirectoryPath);
 
     const list: Article[] = await Promise.all(
-      slugNames.map(async (slugName) => {
+      fileNames.map(async (fileName) => {
+        const slugName = fileName.replace(/\.mdx/, '');
         return Article.makeArticleByFile(new ArticleSlug(slugName));
       }),
     );

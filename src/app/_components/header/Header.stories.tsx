@@ -20,16 +20,3 @@ export const TitleLink: Story = {
     isLink: true,
   },
 };
-
-export const Scroll: Story = {
-  args: {
-    ...TitleHeader.args,
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ height: '3000px' }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
