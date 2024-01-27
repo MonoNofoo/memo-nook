@@ -1,5 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 import ArticleListItem from '@src/app/_components/article-list-item/ArticleListItem';
+import { ArticleSlug } from '@src/model/article/ArticleSlug';
+import { CreatedAt } from '@src/model/article/CreatedAt';
+import { Title } from '@src/model/article/Title';
 
 const meta = {
   component: ArticleListItem,
@@ -19,8 +22,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     color: 'skyStripe',
-    title: 'タイトルタイトルタイトルタイトルタイトルタイトル',
-    createdAt: new Date('2023-12-01'),
+    title: new Title('タイトルタイトルタイトルタイトルタイトルタイトル'),
+    createdAt: new CreatedAt(new Date('2023-12-01')),
+    slug: new ArticleSlug('slug'),
   },
 };
 

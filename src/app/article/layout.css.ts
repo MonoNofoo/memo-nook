@@ -8,7 +8,7 @@ export const container = style({
 });
 
 export const article = style({
-  padding: '8px 16px',
+  padding: '8px 16px 40px',
   backgroundColor: vars.color.white,
   position: 'relative',
   boxShadow: '0 3px 5px rgba(0,0,0,.1)',

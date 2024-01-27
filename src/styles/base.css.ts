@@ -14,6 +14,7 @@ export const vars = createGlobalTheme(':root', {
     fontDefault: '#333',
     fontGray: '#999',
     fontCode: '#0d9aaf',
+    border: '#dfdfdf',
     outerBackground: '#fafafa',
   },
   shadow: {
