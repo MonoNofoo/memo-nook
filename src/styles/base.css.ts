@@ -13,6 +13,7 @@ export const vars = createGlobalTheme(':root', {
     tapePurple: '#a733ff',
     fontDefault: '#333',
     fontGray: '#999',
+    fontCode: '#0d9aaf',
     outerBackground: '#fafafa',
   },
   shadow: {

@@ -5,6 +5,7 @@ export const list = style({
   padding: 0,
   selectors: {
     '& &': {
+      margin: 0,
       paddingLeft: 20,
     },
   },
