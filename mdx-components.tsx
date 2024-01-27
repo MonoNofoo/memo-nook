@@ -1,4 +1,5 @@
 import type { MDXComponents } from 'mdx/types';
+import Blockquote from '@src/app/article/_components/blockquote/Blockquote';
 import Code from '@src/app/article/_components/code/Code';
 import H2 from '@src/app/article/_components/h2/H2';
 import H3 from '@src/app/article/_components/h3/H3';
@@ -24,6 +25,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     pre: ({ children, className }) => (
       <PreformattedText className={className}>{children}</PreformattedText>
     ),
+    blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
     ...components,
   };
 }
