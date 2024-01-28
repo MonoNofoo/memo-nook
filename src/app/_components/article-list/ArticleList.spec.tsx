@@ -25,7 +25,6 @@ describe('ArticleListについて', () => {
 
   it('ArticleListItemが使用されている', async () => {
     await setup();
-
     const target = screen.getByTestId('ArticleListItem');
 
     expect(target).toBeInTheDocument();

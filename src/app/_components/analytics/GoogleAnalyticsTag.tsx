@@ -12,6 +12,7 @@ const GoogleAnalyticsTag: FC = () => {
     <Script
       src={`https://www.googletagmanager.com/gtag/js?id=${gTagId}`}
       id="GoogleAnalyticsTag"
+      data-testid="GoogleAnalyticsTag"
       dangerouslySetInnerHTML={{
         __html: `
           window.dataLayer = window.dataLayer || [];
