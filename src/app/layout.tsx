@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { M_PLUS_1 } from 'next/font/google';
 import clsx from 'clsx';
 import 'sanitize.css';
+import GoogleAnalyticsTag from '@src/app/_components/analytics/GoogleAnalyticsTag';
 import Header from '@src/app/_components/header/Header';
 import '@src/styles/base.css';
 
@@ -21,6 +22,9 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="ja" className={clsx(mPlusOne.variable)}>
+    <head>
+      <GoogleAnalyticsTag />
+    </head>
     <body>
       <Header />
       {children}
