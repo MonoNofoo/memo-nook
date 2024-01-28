@@ -3,12 +3,14 @@ import { Article } from '@src/model/article/Article';
 import { ArticleSlug } from '@src/model/article/ArticleSlug';
 
 const Page = async ({ params }: { params: { slug: string } }) => {
-  const Content = await import(`@src/app/article/_mdx/${params.slug}.mdx`);
+  const { default: Content, metadata } = await import(
+    `@src/app/article/_mdx/${params.slug}.mdx`
+  );
   const article = await Article.makeArticleByFile(new ArticleSlug(params.slug));
 
   return (
     <div>
-      <h1 className={styles.title}>{Content.metadata.title}</h1>
+      <h1 className={styles.title}>{metadata.title}</h1>
       <dl className={styles.dateShowcase}>
         <div className={styles.dateRow}>
           <dt>作成日：</dt>
@@ -24,7 +26,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
         </div>
       </dl>
 
-      <Content.default />
+      <Content />
     </div>
   );
 };
