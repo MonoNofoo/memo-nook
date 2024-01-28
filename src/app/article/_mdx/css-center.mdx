@@ -1,3 +1,4 @@
+import { CreatedAt } from '../../../model/article/CreatedAt';
 import Flex from '../_components/demo/css-center/Flex';
 import FlexMultiple from '../_components/demo/css-center/FlexMultiple';
 import Grid from '../_components/demo/css-center/Grid';
@@ -9,6 +10,8 @@ export const metadata = {
   title: 'CSS で真ん中にする方法を覚えてる限り書き出す',
   description: 'CSS で上下左右中央にする方法を色々紹介。',
 };
+
+export const createdAt = new CreatedAt(new Date('2024-01-27'));
 
 真ん中寄せに関係ないスタイルの記述は HTML の style 属性値として書いてます。
 

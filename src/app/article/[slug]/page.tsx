@@ -18,12 +18,6 @@ const Page = async ({ params }: { params: { slug: string } }) => {
             <time>{article.getCreatedAt().formatter()}</time>
           </dd>
         </div>
-        <div className={styles.dateRow}>
-          <dt>更新日：</dt>
-          <dd className={styles.date}>
-            <time>{article.getUpdatedAt().formatter()}</time>
-          </dd>
-        </div>
       </dl>
 
       <Content />
