@@ -1,0 +1,70 @@
+import { CreatedAt } from '../../../model/article/CreatedAt';
+
+export const metadata = {
+  title: 'React で details 要素を使ったアコーディオン',
+  description:
+    'React で details 要素を使ったアコーディオンを作るなら多分こう書けば良さそう。',
+};
+
+export const createdAt = new CreatedAt(new Date('2024-02-11'));
+
+せっかくアコーディオン用の HTML 要素があるし、それ使いたいよねっていうアレ。
+
+```typescript jsx
+import { FC, ReactNode } from 'react';
+
+export type AccordionCoreProps = {
+  summary: ReactNode;
+  children: ReactNode;
+  isOpen: boolean;
+  handleToggle: (isOpen: boolean) => void;
+};
+
+const AccordionCore: FC<AccordionCoreProps> = ({
+  summary,
+  children,
+  isOpen,
+  handleToggle,
+}) => {
+  return (
+    <details
+      open={isOpen}
+      onToggle={(e) => {
+        handleToggle((e.target as HTMLDetailsElement).open);
+      }}
+    >
+      <summary>{summary}</summary>
+      <div>{children}</div>
+    </details>
+  );
+};
+
+export default AccordionCore;
+```
+
+onClick でやる方法も見かけたけど、[MDN の details 要素の説明](https://developer.mozilla.org/ja/docs/Web/HTML/Element/details#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88)をみると toggle イベントで開閉状態の変化をみると良さそう。
+
+使い方の想定としては下記みたいな感じ。
+
+```typescript jsx
+import { useState } from 'react';
+import AccordionCore from './AccordionCore';
+
+const Hoge = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <AccordionCore
+      summary="見出しのテキスト"
+      isOpen={isOpen}
+      handleToggle={(openState) => {setIsOpen(openState)}}
+    >
+      中身のテキスト
+    </AccordionCore>
+  );
+}
+```
+
+このやり方、実は `isOpen` の State を更新しなくても開閉状態は変わる（たぶん HTML 側が状態を持っている）。それでも `handleToggle={(openState) => {setIsOpen(openState)}}` をやってるのは実際の開閉状態と State の中身をそろえるため。
+
+あと、summary 要素をクリックしなくても、isOpen の状態を変更させてもちゃんと開閉状態が変わるのでアコーディオンクリックする以外でも開閉状態の変更が出来る。
