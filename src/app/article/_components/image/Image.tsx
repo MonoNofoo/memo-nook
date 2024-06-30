@@ -6,7 +6,7 @@ export type ImageProps = {
   alt: string | undefined;
 };
 
-const Image: FC<ImageProps> = ({ src, alt }) => {
+const Image: FC<ImageProps> = ({ src, alt = '' }) => {
   return <img src={src} alt={alt} className={styles.image} />;
 };
 
