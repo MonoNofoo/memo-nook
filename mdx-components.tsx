@@ -5,6 +5,7 @@ import H2 from '@src/app/article/_components/h2/H2';
 import H3 from '@src/app/article/_components/h3/H3';
 import H4 from '@src/app/article/_components/h4/H4';
 import H5 from '@src/app/article/_components/h5/H5';
+import Image from '@src/app/article/_components/image/Image';
 import OrderedList from '@src/app/article/_components/ordered-list/OrderedList';
 import Paragraph from '@src/app/article/_components/paragraph/Paragraph';
 import PreformattedText from '@src/app/article/_components/preformatted-text/PreformattedText';
@@ -26,6 +27,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <PreformattedText className={className}>{children}</PreformattedText>
     ),
     blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
+    img: ({ src, alt }) => <Image alt={alt} src={src} />,
     ...components,
   };
 }

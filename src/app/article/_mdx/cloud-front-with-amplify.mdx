@@ -1,0 +1,45 @@
+import { CreatedAt } from '../../../model/article/CreatedAt';
+
+export const metadata = {
+  title: 'Amplify を CloudFront 経由にしたい',
+  description:
+    'Amplify の手前に CloudFront を設置してアクセスするときにその CloudFront を経由するようにする方法',
+};
+
+export const createdAt = new CreatedAt(new Date('2024-06-30'));
+
+インフラ詳しくないので間違ったことを書いてる可能性があります。でも、設定方法はこれで大丈夫なはず。
+
+## 想定構成
+
+こんな感じ。
+![構成図](/images/article/cloud-front-with-amplify/image01.png)
+こうする目的としては同じドメインで特定のパスだけ Apmlify、それ以外は ECS に向けたいとか。あとは Amplify に WAF つけれないので CloudFront に WAF つけることで間接的に WAF によるアクセス制限をかけるとか。
+
+## やり方
+
+- CloudFront のオリジンに Amplify をドメインを登録
+- ビヘイビアで Amplify に向いてほしいパスパターンを登録
+  - オリジンとオリジングループを先ほど登録したオリジンにする
+  - オリジンリクエストポリシーを `AllViewerExceptHostHeader` にする
+- Amplify の環境変数に `_DISABLE_L2_CACHE: true` を設定する
+
+これで CloudFront 経由で Amplify へアクセスすることができます。
+特に名言してない設定値についてはたぶん、なんでも大丈夫です。知らんけど。
+
+### オリジンリクエストポリシーを `AllViewerExceptHostHeader` にする意味
+
+Next.js の Parallel Routes と Intercepting Routes を使用したモーダルが動かないから。
+このモーダルを開こうとしたときに、クエリパラメーター付きのリクエストが送信されているので、このオリジンリクエストポリシーを設定しないと Amplify にまでクエリパラメーターが送信されなくて普通の画面遷移になります。
+
+### Amplify の環境変数に `_DISABLE_L2_CACHE: true` を設定する意味
+
+CloudFront には CloudFront 内の無限ループを防ぐために CloudFront から CloudFront への遷移は 1 回までになってます。
+Amplify の内部では既に CloudFront が 2 つ使われているため、そこにさらに CloudFront を追加すると CloudFront がエラーを返すようになります。
+
+`_DISABLE_L2_CACHE: true` は [Amplify の内部で使われている CloudFront の 1 つを無効にする環境変数](https://github.com/aws-amplify/amplify-hosting/issues/8#issuecomment-518777578)のためこれを設定することでこのエラーを回避できます。
+
+## Amplify への直接アクセス防ぎたいんだけど……
+
+Amplify 側にベーシック認証を設定するしか今のところ方法がありません。（Amplify のアクセスコントロールから設定可能）
+CloudFront のオリジンのカスタムリクエストヘッダーに、Amplify のベーシック認証情報を設定することで CloudFront 経由のときだけアクセスすることが可能になります。
