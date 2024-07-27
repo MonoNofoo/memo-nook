@@ -16,7 +16,6 @@ export const showcaseWrap = style({
 
 export const showcase = style({
   display: 'grid',
-  gridTemplateRows: '150px',
   gap: '16px',
   '@container': {
     '(width > 300px)': {
