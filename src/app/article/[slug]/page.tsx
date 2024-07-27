@@ -3,6 +3,19 @@ import * as styles from '@src/app/article/[slug]/page.css';
 import { Article } from '@src/model/article/Article';
 import { ArticleSlug } from '@src/model/article/ArticleSlug';
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
+  const article = await import(`@src/app/article/_mdx/${params.slug}.mdx`);
+
+  return {
+    title: article.metadata.title,
+    description: article.metadata.description,
+  };
+};
+
 const Page: FC<{ params: { slug: string } }> = async ({ params }) => {
   const { default: Content, metadata } = await import(
     `@src/app/article/_mdx/${params.slug}.mdx`
