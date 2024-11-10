@@ -4,10 +4,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 
 const config: StorybookConfig = {
-  stories: [
-    '../src/**/*.stories.mdx',
-    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-  ],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -49,15 +47,19 @@ const config: StorybookConfig = {
         ],
       },
     },
+    '@chromatic-com/storybook',
+    '@storybook/addon-mdx-gfm',
   ],
+
   framework: {
     name: '@storybook/nextjs',
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
+
+  docs: {},
+
   staticDirs: ['../public/'],
+
   async webpackFinal(config, { configType }) {
     if (config?.resolve?.alias) {
       config.resolve.alias = {
@@ -68,6 +70,10 @@ const config: StorybookConfig = {
     }
 
     return config;
+  },
+
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
   },
 };
 export default config;
