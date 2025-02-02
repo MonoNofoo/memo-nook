@@ -14,8 +14,6 @@ export const Default: Story = {
     summary: 'eee',
     children: 'bbb',
     isOpen: false,
-    handleToggle: (isOpen) => {
-      console.log(isOpen);
-    },
+    handleToggle: () => {},
   },
 };

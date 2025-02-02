@@ -6,9 +6,10 @@ import { ArticleSlug } from '@src/model/article/ArticleSlug';
 export const generateMetadata = async ({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) => {
-  const article = await import(`@src/app/article/_mdx/${params.slug}.mdx`);
+  const { slug } = await params;
+  const article = await import(`@src/app/article/_mdx/${slug}.mdx`);
 
   return {
     title: article.metadata.title,
@@ -16,11 +17,12 @@ export const generateMetadata = async ({
   };
 };
 
-const Page: FC<{ params: { slug: string } }> = async ({ params }) => {
+const Page: FC<{ params: Promise<{ slug: string }> }> = async ({ params }) => {
+  const { slug } = await params;
   const { default: Content, metadata } = await import(
-    `@src/app/article/_mdx/${params.slug}.mdx`
+    `@src/app/article/_mdx/${slug}.mdx`
   );
-  const article = await Article.makeArticleByFile(new ArticleSlug(params.slug));
+  const article = await Article.makeArticleByFile(new ArticleSlug(slug));
 
   return (
     <div>
